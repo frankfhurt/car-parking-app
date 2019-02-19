@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Car Parking</string>
+
+    <string name="msg_subscribed">Subscribed to parking topic</string>
+
+    <string name="msg_subscribe_failed">Failed to subscribe to parking topic</string>
+</resources>
