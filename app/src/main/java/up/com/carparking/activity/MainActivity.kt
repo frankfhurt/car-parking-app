@@ -76,7 +76,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 val parkingStatusFragment = ParkingStatusFragment.newInstance("E1_ParkingUP")
                 addFragment(R.id.layout_fragment, parkingStatusFragment)
             }
-            R.id.nav_settings -> {
+            R.id.nav_about -> {
                 toast("Author: Franklyn Vieira")
             }
         }
