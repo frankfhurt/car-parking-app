@@ -17,8 +17,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
-            // TODO Logic to trigger parking status update from Activity goes here
-
             val context = MainActivity.mContext
 
             val updateStatusIntent = Intent("updateParkingStatus")
