@@ -11,10 +11,10 @@ import android.view.View
 import android.widget.Toast
 
 /**
- * Created by Franklyn on 03/09/2017.
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
  */
-
-// findViewById + setOnClickListener
 fun AppCompatActivity.onClick(@IdRes viewId: Int, onClick: (v: android.view.View?) -> Unit) {
     val view = findViewById<View>(viewId)
     view.setOnClickListener { onClick(it) }

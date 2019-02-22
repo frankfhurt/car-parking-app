@@ -25,6 +25,11 @@ import up.com.carparking.repository.domain.ParkingStatus
 
 private const val PARKING_ID = "parkingId"
 
+/**
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
+ */
 class ParkingStatusFragment : Fragment() {
 
     val TAG = "main"

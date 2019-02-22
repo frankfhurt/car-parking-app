@@ -7,7 +7,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * Created by Franklyn 19/02/2019
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
  */
 object RetrofitUtil {
     fun getRetrofit(url: String): Retrofit {

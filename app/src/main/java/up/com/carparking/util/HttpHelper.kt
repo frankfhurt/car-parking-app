@@ -5,7 +5,9 @@ import okhttp3.*
 import java.io.IOException
 
 /**
- * Created by frank on 27/10/2017.
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
  */
 object HttpHelper {
 

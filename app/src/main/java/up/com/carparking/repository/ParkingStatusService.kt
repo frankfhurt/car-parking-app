@@ -3,11 +3,13 @@ package up.com.carparking.repository
 import up.com.carparking.repository.domain.ParkingStatus
 
 /**
- * Created by Franklyn 19/02/2019
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
  */
 object ParkingStatusService {
-    private const val baseUrl = "URL GOES HERE"
-    private const val apiKey = "KEY GOES HERE"
+    private const val baseUrl = "URL"
+    private const val apiKey = "KEY"
     private var service: StatusAPI
 
     init {

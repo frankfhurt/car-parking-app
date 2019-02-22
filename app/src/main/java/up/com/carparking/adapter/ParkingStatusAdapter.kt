@@ -10,6 +10,11 @@ import up.com.carparking.R
 import up.com.carparking.repository.domain.ParkingLot
 import up.com.carparking.repository.domain.ParkingStatus
 
+/**
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
+ */
 class ParkingStatusAdapter(
         val status: ParkingStatus,
         val onClick: (ParkingLot) -> Unit) :

@@ -15,6 +15,11 @@ import up.com.carparking.R
 import up.com.carparking.extensions.addFragment
 import up.com.carparking.fragment.ParkingStatusFragment
 
+/**
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
+ */
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val TAG = "main activity"

@@ -6,6 +6,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import up.com.carparking.repository.ParkingStatusService
 
+/**
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
+ */
 class ParkingStatusPresenter(private val view: StatusView) {
 
     @SuppressLint("CheckResult")

@@ -7,6 +7,11 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import up.com.carparking.fragment.ParkingStatusFragment
 
+/**
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
+ */
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     val TAG = "firebase"
 

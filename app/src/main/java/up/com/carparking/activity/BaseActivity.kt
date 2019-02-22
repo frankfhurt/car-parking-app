@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 
+/**
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
+ */
 @SuppressLint("Registered")
 open class BaseActivity : AppCompatActivity() {
-    // Propriedade para acessar o contexto de qualquer lugar
     protected val context: Context get() = this
-    // Métodos comuns para todas activities aqui...
 }

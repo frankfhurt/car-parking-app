@@ -7,7 +7,9 @@ import retrofit2.http.Path
 import up.com.carparking.repository.domain.ParkingStatus
 
 /**
- * Created by Franklyn 19/02/2019
+ * Created by Franklyn Vieira 22/02/2019
+ * @author Franklyn Vieira
+ * @since 22/02/2019
  */
 interface StatusAPI {
 
