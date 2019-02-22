@@ -1,8 +1,11 @@
 package up.com.carparking.push
 
+import android.content.Intent
+import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import up.com.carparking.activity.MainActivity
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     val TAG = "firebase"
@@ -14,13 +17,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
-            if (/* Check if data needs to be processed by long running job */ true) {
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
-//                scheduleJob()
-            } else {
-                // Handle message within 10 seconds
-//                handleNow()
-            }
+            // TODO Logic to trigger parking status update from Activity goes here
+
+            val context = MainActivity.mContext
+
+            val updateStatusIntent = Intent("updateParkingStatus")
+            LocalBroadcastManager.getInstance(context).sendBroadcast(updateStatusIntent)
         }
 
         remoteMessage?.notification?.let {

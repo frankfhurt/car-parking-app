@@ -1,6 +1,11 @@
 package up.com.carparking.activity
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
@@ -25,9 +30,14 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        mContext = context
+
         setContentView(R.layout.activity_main)
 
         btGet.setOnClickListener { onClickGet() }
+
+        // Register to broadcast
+        LocalBroadcastManager.getInstance(context).registerReceiver(mReceiver, IntentFilter("updateParkingStatus"))
 
         // Views
         recyclerView.layoutManager = GridLayoutManager(context, 5)
@@ -48,6 +58,10 @@ class MainActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         presenter.taskParkingStatus()
+    }
+
+    companion object {
+        lateinit var mContext: Context
     }
 
     private fun onClickGet() {
@@ -78,6 +92,12 @@ class MainActivity : BaseActivity() {
 
         override fun showProgress() {
             progress.visibility = View.VISIBLE
+        }
+    }
+
+    private val mReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            presenter.taskParkingStatus()
         }
     }
 }
