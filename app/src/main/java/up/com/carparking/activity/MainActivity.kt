@@ -1,48 +1,38 @@
 package up.com.carparking.activity
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
-import android.support.v4.content.LocalBroadcastManager
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
+import android.support.design.widget.NavigationView
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import android.util.Log
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.include_progress.*
+import kotlinx.android.synthetic.main.app_bar_main_activity.*
+import kotlinx.android.synthetic.main.main_activity.*
 import org.jetbrains.anko.toast
 import up.com.carparking.R
-import up.com.carparking.adapter.ParkingStatusAdapter
-import up.com.carparking.repository.domain.ParkingLot
-import up.com.carparking.repository.domain.ParkingStatus
+import up.com.carparking.extensions.addFragment
+import up.com.carparking.fragment.ParkingStatusFragment
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    val TAG = "main"
-
-    private val presenter: ParkingStatusPresenter by lazy {
-        ParkingStatusPresenter(view)
-    }
+    private val TAG = "main activity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.main_activity)
+        setSupportActionBar(toolbar)
 
-        mContext = context
+        val toggle = ActionBarDrawerToggle(
+            this, drawer_layout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
 
-        setContentView(R.layout.activity_main)
-
-        btGet.setOnClickListener { onClickGet() }
-
-        // Register to broadcast
-        LocalBroadcastManager.getInstance(context).registerReceiver(mReceiver, IntentFilter("updateParkingStatus"))
-
-        // Views
-        recyclerView.layoutManager = GridLayoutManager(context, 5)
-        recyclerView.itemAnimator = DefaultItemAnimator()
-        recyclerView.setHasFixedSize(true)
+        nav_view.setNavigationItemSelectedListener(this)
 
         FirebaseMessaging.getInstance().subscribeToTopic("parking")
             .addOnCompleteListener { task ->
@@ -55,49 +45,38 @@ class MainActivity : BaseActivity() {
             }
     }
 
-    override fun onResume() {
-        super.onResume()
-        presenter.taskParkingStatus()
-    }
-
-    companion object {
-        lateinit var mContext: Context
-    }
-
-    private fun onClickGet() {
-        presenter.taskParkingStatus()
-    }
-
-    private fun onClickParkingLot(status: ParkingLot) {
-        toast(status.status)
-    }
-
-    /**
-     * View
-     */
-    private val view = object : StatusView {
-        override fun alert(msg: String) {
-            progress.visibility = View.INVISIBLE
-            toast(msg)
-        }
-
-        override fun setParkingStatus(status: ParkingStatus) {
-            val adapter = ParkingStatusAdapter(status) { status -> onClickParkingLot(status) }
-            recyclerView.adapter = adapter
-
-            progress.visibility = View.INVISIBLE
-            toast("AH  -  $status")
-            Log.d(TAG, status.toString())
-        }
-
-        override fun showProgress() {
-            progress.visibility = View.VISIBLE
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
 
-    private val mReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            presenter.taskParkingStatus()
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.nav_drawe, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings -> return true
+            else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_parking_status -> {
+                val parkingStatusFragment = ParkingStatusFragment.newInstance("E1_ParkingUP")
+                addFragment(R.id.layout_fragment, parkingStatusFragment)
+            }
+            R.id.nav_settings -> {
+                toast("Author: Franklyn Vieira")
+            }
+        }
+
+        drawer_layout.closeDrawer(GravityCompat.START)
+        return true
     }
 }
