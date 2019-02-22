@@ -22,9 +22,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         remoteMessage?.data?.isNotEmpty()?.let {
             Log.d(TAG, "Message data payload: " + remoteMessage.data)
 
-            ParkingStatusFragment.mContext.let {
-                val updateStatusIntent = Intent("updateParkingStatus")
-                LocalBroadcastManager.getInstance(it).sendBroadcast(updateStatusIntent)
+            if (ParkingStatusFragment.isActivityVisible) {
+                ParkingStatusFragment.mContext.let {
+                    val updateStatusIntent = Intent("updateParkingStatus")
+                    LocalBroadcastManager.getInstance(it).sendBroadcast(updateStatusIntent)
+                }
             }
         }
 
